@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        const DELAY = 20000; // how long to show the socials in milliseconds (20000 = 20 seconds)
+        const SOCIALS = [
+        {
+            filename: "./youtube_logo.png",
+            username: "yuggie_tv",
+        },
+        {
+            filename: "./ig_logo.png",
+            username: "yuggietv",
+        },
+        {
+            filename: "./twitter_logo.png",
+            username: "yuggietv",
+        },
+        {
+            filename: "./tiktok_logo.png",
+            username: "yuggie_tv",
+        },
+    ]
+    </script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400" rel="stylesheet">
+    <style>
+        .fade-in {
+            -webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+            animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+        }
+
+        @-webkit-keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .fade-out {
+            -webkit-animation: fade-out 1s ease-out both;
+            animation: fade-out 1s ease-out both;
+        }
+
+        @-webkit-keyframes fade-out {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fade-out {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="socials-container" style="display: flex; align-items: center;">
+        <img id="socials-logo" style="height: 18vw;"></img>
+        <span style="color:white; font-size: 16vw; padding: 4vw;" id="socials-username"></span>
+    </div>
+</body>
+<script>
+    function textIn() {
+        document.getElementById("socials-username").className = "fade-in";
+    }
+
+    function textOut() {
+        document.getElementById("socials-username").className = "fade-out";
+    }
+
+    function logoIn() {
+        document.getElementById("socials-logo").className = "fade-in";
+    }
+
+    function logoOut() {
+        document.getElementById("socials-logo").className = "fade-out";
+    }
+
+    let social = 0;
+    function animateSocials() {
+        document.getElementById("socials-username").innerText = SOCIALS[social].username;
+        document.getElementById("socials-logo").src = SOCIALS[social].filename;
+        logoIn()
+        textIn()
+        setTimeout(function () {
+            textOut()
+            logoOut()
+            setTimeout(function () {
+                social += 1;
+                if (social > SOCIALS.length - 1) {
+                    social = 0;
+                }
+                animateSocials();
+            }, 1500)
+        }, DELAY)
+    }
+
+    window.onload = function () {
+        animateSocials()
+    };
+</script>
+
+</html>
